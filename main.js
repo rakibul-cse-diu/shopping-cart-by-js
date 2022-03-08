@@ -69,6 +69,10 @@ products.map(product => {
 const handleAddCart = (id) => {
     const product = products[id - 1];
     const container = document.querySelector(".item-container");
+    const itemPrice = document.getElementById("item-price");
+    const shipping = document.getElementById("shipping");
+    const total = document.getElementById("total");
+    let haveShipiiing = false;
     const col = document.createElement("div");
     col.className = "col-12 border-bottom border-primary pb-2";
 
@@ -85,4 +89,14 @@ const handleAddCart = (id) => {
     `
 
     container.appendChild(col);
+
+    itemPrice.innerText = parseInt(itemPrice.innerText) + parseInt(product.Price);
+    shipping.innerText = 15;
+
+    if (!haveShipiiing) {
+        total.innerText = parseInt(itemPrice.innerText) + parseInt(shipping.innerText);
+        haveShipiiing = true;
+    } else {
+        total.innerText = parseInt(itemPrice.innerText)
+    }
 }
