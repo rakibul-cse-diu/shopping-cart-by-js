@@ -1,6 +1,5 @@
 // Data
-
-const products = [
+var products = [
     {
         id: 1,
         img: "./images/product-1.jpg",
@@ -52,7 +51,7 @@ products.map(product => {
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">This is a longer card with supporting text below.</p>
                     <h6 class="d-inline">Price: $</h6><span class="fs-3" id="shoe-price">${product.Price}</span>
-                    <button class="btn btn-primary d-block m-auto buttn" id="t-shirt-btn">Add to
+                    <button class="btn btn-primary d-block m-auto buttn" id="t-shirt-btn" onclick="handleAddCart(${product.id})">Add to
                         cart</button>
                 </div>
             </div>
@@ -64,3 +63,26 @@ products.map(product => {
 
 
 });
+
+
+// handle add cart button
+const handleAddCart = (id) => {
+    const product = products[id - 1];
+    const container = document.querySelector(".item-container");
+    const col = document.createElement("div");
+    col.className = "col-12 border-bottom border-primary pb-2";
+
+    col.innerHTML = `
+            <div class="item d-flex flex-column flex-lg-row justify-contennt-center align-items-center">
+                <img src='${product.img}' alt="" height="60px" width="60px">
+                <h6 class="ms-5 me-5">${product.name}</h6>
+                <div class="quantity d-flex flex-column flex-lg-row">
+                    <button class="btn btn-danger dec-bttn">-</button>
+                    <span class="count-field text-center d-inline-block m-2">1</span>
+                    <button class="btn btn-success inc-bttn">+</button>
+                </div>
+            </div>
+    `
+
+    container.appendChild(col);
+}
